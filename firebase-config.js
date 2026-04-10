@@ -18,7 +18,7 @@ if (!firebase.apps.length) {
 var db = firebase.firestore();
 
 // ── ZERAR + POPULAR BANCO ─────────────────────
-// Apaga tudo e insere os dados novos do Studio Ferran
+// Apaga tudo e insere os dados novos do Studio Feran
 async function seedBanco() {
   try {
     // ── ZERA PROFISSIONAIS ─────────────────────
@@ -34,10 +34,10 @@ async function seedBanco() {
     }
 
     // ── INSERE PROFISSIONAL ────────────────────
-    await db.collection("profissionais").doc("ferran").set({
-      nome: "Ferran",
+    await db.collection("profissionais").doc("feran").set({
+      nome: "Feran",
       especialidade: "Barbeiro",
-      foto: "fotos/ferran.jpg",
+      foto: "fotos/feran.jpg",
       ativo: true,
     });
 
@@ -101,7 +101,7 @@ async function seedBanco() {
       });
     }
 
-    console.log("[Studio Ferran] Banco populado com sucesso.");
+    console.log("[Studio Feran] Banco populado com sucesso.");
   } catch (e) {
     console.warn("[seed] Erro:", e.code, e.message);
   }
