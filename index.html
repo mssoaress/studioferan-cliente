@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+  <meta name="theme-color" content="#080808"/>
+  <title>Studio Ferran — Agendar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800&family=Inter+Tight:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="agendar.css"/>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-inner">
+
+    <!-- LOGO TOPO -->
+    <div class="logo-row">
+      <img class="logo-img" id="logoImg" src="img/logo.jpg" alt="Studio Ferran"/>
+      <div class="logo-mark-fb hidden-fb" id="logoFb">
+        <div class="logo-mark">SF</div>
+        <div>
+          <div class="logo-name">Studio Ferran</div>
+          <div class="logo-city">Campina Grande &middot; PB</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTEÚDO HERO: texto + foto do barbeiro lado a lado -->
+    <div class="hero-body">
+      <div class="hero-text">
+        <h1 class="hero-title">AGENDE<br><span>SEU HORÁRIO</span></h1>
+        <p class="hero-sub">Rápido. Sem ligação. Sem espera.</p>
+      </div>
+      <div class="hero-photo-wrap" id="barberPhotoWrap">
+        <img class="hero-barber-photo" id="barberPhoto" src="img/barber.jpg" alt="Ferran"/>
+        <div class="hero-photo-placeholder" id="barberFallback" style="display:none">
+          <svg viewBox="0 0 64 64" fill="none" width="40" height="40">
+            <circle cx="32" cy="22" r="14" fill="rgba(160,200,130,.2)"/>
+            <path d="M6 64c0-14.36 11.64-26 26-26s26 11.64 26 26" fill="rgba(160,200,130,.15)"/>
+          </svg>
+          <span>Ferran</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- PROGRESS -->
+<div class="prog-wrap" id="progWrap">
+  <div class="prog-track"><div class="prog-fill" id="progFill" style="width:25%"></div></div>
+  <div class="prog-steps">
+    <div class="prog-step active" data-n="1"><div class="ps-num"><span>1</span></div><span class="ps-lbl">Serviços</span></div>
+    <div class="prog-step" data-n="2"><div class="ps-num"><span>2</span></div><span class="ps-lbl">Horário</span></div>
+    <div class="prog-step" data-n="3"><div class="ps-num"><span>3</span></div><span class="ps-lbl">Confirmar</span></div>
+  </div>
+</div>
+
+<main class="screens">
+
+  <!-- TELA 1: SERVIÇOS -->
+  <section class="screen active" id="sc1">
+    <div class="screen-head">
+      <h2 class="screen-title">O que você vai fazer?</h2>
+      <p class="screen-sub">Selecione um ou mais serviços</p>
+    </div>
+    <div class="serv-list" id="servList">
+      <div class="sk" style="height:66px"></div>
+      <div class="sk" style="height:66px;animation-delay:.08s"></div>
+      <div class="sk" style="height:66px;animation-delay:.16s"></div>
+    </div>
+    <div class="total-bar hidden" id="totalBar">
+      <span>Total estimado</span>
+      <strong id="totalVal">R$ 0,00</strong>
+    </div>
+    <div class="cta-bar">
+      <button class="btn-next" onclick="goStep(2)">Próximo →</button>
+    </div>
+  </section>
+
+  <!-- TELA 2: HORÁRIO -->
+  <section class="screen" id="sc2">
+    <div class="screen-head">
+      <h2 class="screen-title">Data e horário</h2>
+      <p class="screen-sub">Escolha quando prefere ser atendido</p>
+    </div>
+    <div class="date-wrap">
+      <div class="date-strip" id="dateStrip"></div>
+    </div>
+    <div class="slots-wrap">
+      <p class="slots-label">Horários disponíveis</p>
+      <div class="slots-grid" id="slotsGrid">
+        <div class="sk sk-slot"></div>
+        <div class="sk sk-slot" style="animation-delay:.06s"></div>
+        <div class="sk sk-slot" style="animation-delay:.12s"></div>
+        <div class="sk sk-slot" style="animation-delay:.18s"></div>
+      </div>
+    </div>
+    <div class="cta-bar two">
+      <button class="btn-back" onclick="goStep(1)">← Voltar</button>
+      <button class="btn-next" onclick="goStep(3)">Próximo →</button>
+    </div>
+  </section>
+
+  <!-- TELA 3: CONFIRMAR -->
+  <section class="screen" id="sc3">
+    <div class="screen-head">
+      <h2 class="screen-title">Seus dados</h2>
+      <p class="screen-sub">Último passo — quase lá!</p>
+    </div>
+    <div class="form-wrap">
+      <div class="form-field">
+        <label class="form-label">Nome completo</label>
+        <input class="form-input" type="text" id="fNome" placeholder="Seu nome" autocomplete="name"/>
+      </div>
+      <div class="form-field">
+        <label class="form-label">WhatsApp</label>
+        <input class="form-input" type="tel" id="fTel" placeholder="(83) 9 xxxx-xxxx" autocomplete="tel"/>
+      </div>
+    </div>
+    <div class="resume-card" id="resumeCard"></div>
+    <div class="cta-bar two">
+      <button class="btn-back" onclick="goStep(2)">← Voltar</button>
+      <button class="btn-confirm" id="btnConfirmar" onclick="confirmar()">✓ Confirmar</button>
+    </div>
+  </section>
+
+</main>
+
+<!-- SUCESSO -->
+<div class="success-screen hidden" id="successScreen">
+  <div class="success-inner">
+    <div class="suc-icon">
+      <svg viewBox="0 0 64 64" fill="none" width="64" height="64">
+        <circle cx="32" cy="32" r="31" stroke="rgba(160,200,130,.3)" stroke-width="1.5"/>
+        <circle cx="32" cy="32" r="22" fill="rgba(160,200,130,.08)"/>
+        <path d="M20 32l9 9 16-16" stroke="#a0c882" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <h2 class="suc-title">Agendado!</h2>
+    <p class="suc-msg">Seu horário está reservado.<br>Te esperamos no studio.</p>
+    <div class="suc-card" id="sucCard"></div>
+    <a class="btn-wpp" id="btnWpp" href="#" target="_blank">
+      <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Confirmar pelo WhatsApp
+    </a>
+    <button class="btn-reiniciar" onclick="reiniciar()">Fazer novo agendamento</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img class="footer-logo-img" id="footerLogoImg" src="img/logo.jpg" alt="Studio Ferran"/>
+      <div class="footer-logo-fb" id="footerLogoFb" style="display:none">
+        <span class="f-mark">SF</span>
+        <span>Studio Ferran</span>
+      </div>
+    </div>
+
+    <div class="footer-cols">
+      <div class="footer-col">
+        <h4>Horário</h4>
+        <p>Seg–Sex: 09h às 19h</p>
+        <p>Sábado: 09h às 17h</p>
+        <p>Domingo: Fechado</p>
+      </div>
+      <div class="footer-col">
+        <h4>Endereço</h4>
+        <p>R. Vice-Prefeito Antônio de<br>Carvalho Sousa, 450 — Térreo</p>
+        <p>Última sala · Estação Velha</p>
+        <p>Campina Grande – PB</p>
+        <a class="maps-btn" href="https://maps.app.goo.gl/rs5iYZ9NHWkVbN4W6" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          Como chegar
+        </a>
+      </div>
+      <div class="footer-col">
+        <h4>Contato</h4>
+        <p><a href="https://wa.me/5583991630761">WhatsApp: (83) 99163-0761</a></p>
+        <p><a href="tel:+5583999019098">Ligações: (83) 99901-9098</a></p>
+        <p><a href="https://instagram.com/studioferan" target="_blank">@studioferan</a></p>
+      </div>
+    </div>
+
+    <!-- MAPA EMBED -->
+    <div class="map-embed">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3958.5!2d-35.8899!3d-7.2299!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7ac1e8b9b9b9b9b9%3A0x1234567890abcdef!2sCentro%20Jur%C3%ADdico%20Ronaldo%20Cunha%20Lima!5e0!3m2!1spt-BR!2sbr!4v1234567890"
+        width="100%" height="200"
+        style="border:0; border-radius:10px; filter:invert(90%) hue-rotate(180deg);"
+        allowfullscreen loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js">
+  // Esconde a cta-bar quando o usuário scrolla para o footer (mapa)
+  window.addEventListener('scroll', function() {
+    var footer = document.querySelector('.footer');
+    var ctaBars = document.querySelectorAll('.cta-bar');
+    if (!footer || !ctaBars.length) return;
+    var footerTop = footer.getBoundingClientRect().top;
+    var windowH   = window.innerHeight;
+    // Quando o footer entrar na tela, esconde o botão fixo
+    if (footerTop < windowH - 20) {
+      ctaBars.forEach(function(b){ b.style.opacity = '0'; b.style.pointerEvents = 'none'; });
+    } else {
+      ctaBars.forEach(function(b){ b.style.opacity = '1'; b.style.pointerEvents = ''; });
+    }
+  });
+</script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js">
+  // Esconde a cta-bar quando o usuário scrolla para o footer (mapa)
+  window.addEventListener('scroll', function() {
+    var footer = document.querySelector('.footer');
+    var ctaBars = document.querySelectorAll('.cta-bar');
+    if (!footer || !ctaBars.length) return;
+    var footerTop = footer.getBoundingClientRect().top;
+    var windowH   = window.innerHeight;
+    // Quando o footer entrar na tela, esconde o botão fixo
+    if (footerTop < windowH - 20) {
+      ctaBars.forEach(function(b){ b.style.opacity = '0'; b.style.pointerEvents = 'none'; });
+    } else {
+      ctaBars.forEach(function(b){ b.style.opacity = '1'; b.style.pointerEvents = ''; });
+    }
+  });
+</script>
+<script src="firebase-config.js">
+  // Esconde a cta-bar quando o usuário scrolla para o footer (mapa)
+  window.addEventListener('scroll', function() {
+    var footer = document.querySelector('.footer');
+    var ctaBars = document.querySelectorAll('.cta-bar');
+    if (!footer || !ctaBars.length) return;
+    var footerTop = footer.getBoundingClientRect().top;
+    var windowH   = window.innerHeight;
+    // Quando o footer entrar na tela, esconde o botão fixo
+    if (footerTop < windowH - 20) {
+      ctaBars.forEach(function(b){ b.style.opacity = '0'; b.style.pointerEvents = 'none'; });
+    } else {
+      ctaBars.forEach(function(b){ b.style.opacity = '1'; b.style.pointerEvents = ''; });
+    }
+  });
+</script>
+<script src="agendar.js">
+  // Esconde a cta-bar quando o usuário scrolla para o footer (mapa)
+  window.addEventListener('scroll', function() {
+    var footer = document.querySelector('.footer');
+    var ctaBars = document.querySelectorAll('.cta-bar');
+    if (!footer || !ctaBars.length) return;
+    var footerTop = footer.getBoundingClientRect().top;
+    var windowH   = window.innerHeight;
+    // Quando o footer entrar na tela, esconde o botão fixo
+    if (footerTop < windowH - 20) {
+      ctaBars.forEach(function(b){ b.style.opacity = '0'; b.style.pointerEvents = 'none'; });
+    } else {
+      ctaBars.forEach(function(b){ b.style.opacity = '1'; b.style.pointerEvents = ''; });
+    }
+  });
+</script>
+
+<script>
+  // Fallback logo hero
+  var logoImg = document.getElementById('logoImg');
+  var logoFb  = document.getElementById('logoFb');
+  if (logoImg && logoFb) {
+    logoImg.onerror = function() {
+      logoImg.style.display = 'none';
+      logoFb.style.display  = 'flex';
+    };
+  }
+
+  // Fallback logo footer
+  var footerLogoImg = document.getElementById('footerLogoImg');
+  var footerLogoFb  = document.getElementById('footerLogoFb');
+  if (footerLogoImg && footerLogoFb) {
+    footerLogoImg.onerror = function() {
+      footerLogoImg.style.display = 'none';
+      footerLogoFb.style.display  = 'flex';
+    };
+  }
+
+  // Fallback foto do barbeiro
+  var barberPhoto    = document.getElementById('barberPhoto');
+  var barberFallback = document.getElementById('barberFallback');
+  if (barberPhoto && barberFallback) {
+    barberPhoto.onerror = function() {
+      barberPhoto.style.display    = 'none';
+      barberFallback.style.display = 'flex';
+    };
+  }
+
+  // Esconde a cta-bar quando o usuário scrolla para o footer (mapa)
+  window.addEventListener('scroll', function() {
+    var footer = document.querySelector('.footer');
+    var ctaBars = document.querySelectorAll('.cta-bar');
+    if (!footer || !ctaBars.length) return;
+    var footerTop = footer.getBoundingClientRect().top;
+    var windowH   = window.innerHeight;
+    // Quando o footer entrar na tela, esconde o botão fixo
+    if (footerTop < windowH - 20) {
+      ctaBars.forEach(function(b){ b.style.opacity = '0'; b.style.pointerEvents = 'none'; });
+    } else {
+      ctaBars.forEach(function(b){ b.style.opacity = '1'; b.style.pointerEvents = ''; });
+    }
+  });
+</script>
+</body>
+</html>
