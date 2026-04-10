@@ -51,10 +51,7 @@ html {
 }
 
 body {
-<<<<<<< HEAD
   overflow-y: auto;
-=======
->>>>>>> 8e1f0c06cf308c76bc86420e97646e123f7cfe8b
   font-family: 'Inter Tight', sans-serif;
   background: var(--bg);
   color: var(--t1);
@@ -97,7 +94,6 @@ body {
 }
 
 .logo-row {
-<<<<<<< HEAD
   margin-bottom: 28px;
   display: flex;
   justify-content: center;
@@ -118,12 +114,6 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
-=======
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 36px;
->>>>>>> 8e1f0c06cf308c76bc86420e97646e123f7cfe8b
 }
 
 .logo-mark {
@@ -158,7 +148,6 @@ body {
   margin-top: 3px;
 }
 
-<<<<<<< HEAD
 /* HERO BODY: texto + foto lado a lado */
 .hero-body {
   display: flex;
@@ -215,11 +204,6 @@ body {
 .hero-title {
   font-family: 'Barlow Condensed', sans-serif;
   font-size: clamp(48px, 14vw, 76px);
-=======
-.hero-title {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: clamp(60px, 18vw, 90px);
->>>>>>> 8e1f0c06cf308c76bc86420e97646e123f7cfe8b
   font-weight: 800;
   line-height: .88;
   letter-spacing: 2px;
@@ -802,10 +786,7 @@ body {
   width: 100%;
   left: 50%;
   transform: translateX(-50%);
-<<<<<<< HEAD
   transition: opacity .3s ease;
-=======
->>>>>>> 8e1f0c06cf308c76bc86420e97646e123f7cfe8b
 }
 
 .cta-bar.two {
@@ -1023,11 +1004,7 @@ body {
 .footer {
   background: var(--s1);
   border-top: 1px solid var(--line);
-<<<<<<< HEAD
   padding: 36px 20px 130px;
-=======
-  padding: 36px 20px 52px;
->>>>>>> 8e1f0c06cf308c76bc86420e97646e123f7cfe8b
   margin-top: 20px;
 }
 
@@ -1038,7 +1015,6 @@ body {
 
 .footer-brand {
   display: flex;
-<<<<<<< HEAD
   justify-content: center;
   align-items: center;
   margin-bottom: 28px;
@@ -1059,13 +1035,6 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
-=======
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 28px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid var(--line);
->>>>>>> 8e1f0c06cf308c76bc86420e97646e123f7cfe8b
   font-family: 'Barlow Condensed', sans-serif;
   font-size: 18px;
   font-weight: 700;
@@ -1149,10 +1118,7 @@ body {
   border-radius: var(--radius);
   overflow: hidden;
   border: 1px solid var(--line);
-<<<<<<< HEAD
   margin-bottom: 8px;
-=======
->>>>>>> 8e1f0c06cf308c76bc86420e97646e123f7cfe8b
 }
 
 /* ── TOAST ───────────────────────────────────── */
@@ -1218,7 +1184,6 @@ body {
   .hero-title {
     font-size: 110px;
   }
-<<<<<<< HEAD
 }
 
 /* ── FALLBACK HELPERS ────────────────────────── */
@@ -1247,6 +1212,4 @@ body {
   font-weight: 700;
   letter-spacing: 1px;
   text-transform: uppercase;
-=======
->>>>>>> 8e1f0c06cf308c76bc86420e97646e123f7cfe8b
 }
