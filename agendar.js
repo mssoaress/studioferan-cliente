@@ -231,14 +231,35 @@ async function confirmar() {
   }
 
   // tela sucesso
-  var p2   = B.data.split('-');
+  var p2    = B.data.split('-');
   var dtFmt = p2[2]+'/'+p2[1]+'/'+p2[0];
-  var wd = DIAS[new Date(B.data+'T12:00:00').getDay()];
+  var wd    = DIAS[new Date(B.data+'T12:00:00').getDay()];
+
   document.getElementById('sucCard').innerHTML =
     sucRow('Serviços', nomes.join(', '))
     +sucRow('Data', wd+', '+dtFmt)
     +sucRow('Horário', B.horario)
     +sucRow('Total', 'R$ '+fmtM(total));
+
+  // Gera link WhatsApp com mensagem de confirmação para o cliente
+  var listaServicos = nomes.map(function(s, i) { return (i+1)+'. '+s; }).join('\n');
+  var msgCliente = encodeURIComponent(
+    '✅ *Agendamento confirmado!*\n\n'
+    +'Olá, *'+nome+'*! Seu horário no Studio Feran está marcado.\n\n'
+    +'📋 *Resumo do seu agendamento:*\n'
+    +listaServicos+'\n\n'
+    +'🗓 *Data:* '+wd+', '+dtFmt+'\n'
+    +'⏰ *Horário:* '+B.horario+'\n'
+    +'💈 *Studio Feran*\n\n'
+    +'📍 R. Vice-Prefeito Antônio de Carvalho Sousa, 450\n'
+    +'Térreo · Última sala · Estação Velha\n'
+    +'Campina Grande – PB\n\n'
+    +'_Qualquer dúvida, fale conosco por aqui. Te esperamos!_ 🤝'
+  );
+  var btnWpp = document.getElementById('btnWppConfirm');
+  if (btnWpp) {
+    btnWpp.href = 'https://wa.me/5583991630761?text=' + msgCliente;
+  }
 
   document.getElementById('progWrap').style.display = 'none';
   for (var i = 1; i <= 3; i++) document.getElementById('sc'+i).classList.remove('active');
