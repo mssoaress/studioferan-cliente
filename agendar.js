@@ -3,7 +3,7 @@
 // 1 barbeiro · 3 passos · Firebase compat
 // ═══════════════════════════════════════════════
 
-var B = {
+//var B = {
   servicos:      [],       // ids selecionados
   data:          null,
   horario:       null,
@@ -21,7 +21,7 @@ var SLOTS = ['09:00','09:30','10:00','10:30','11:00','11:30','12:00',
 
 window.addEventListener('DOMContentLoaded', function() { iniciar(); });
 
-async function iniciar() {
+//async function iniciar() {
   try {
     await seedBanco();
     var res = await Promise.all([
