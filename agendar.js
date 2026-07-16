@@ -3,7 +3,7 @@
 // 1 barbeiro · 3 passos · Firebase compat
 // ═══════════════════════════════════════════════
 
-//var B = {
+var B = {
   servicos:      [],       // ids selecionados
   data:          null,
   horario:       null,
